@@ -1,6 +1,8 @@
 package com.ghc.cloud.mapper;
 
+import com.ghc.cloud.entity.Parent;
 import com.ghc.cloud.entity.Vehicle;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -11,4 +13,7 @@ import java.util.List;
  */
 public interface VehicleMapper {
     List<Vehicle> getVehicle(Vehicle vehicle);
+
+
+    Parent getParent(@Param("vehicleName") String vehicleName);
 }

@@ -11,6 +11,7 @@ import java.util.List;
  * 2023/3/15 /10:22
  */
 public interface VehicleService {
+
     /**
      * 输入的A公司车型信息 获取B公司对应的车型
      *

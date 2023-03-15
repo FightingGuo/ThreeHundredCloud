@@ -1,9 +1,11 @@
 package com.ghc.cloud.controller;
 
 import com.ghc.cloud.entity.Result;
+import com.ghc.cloud.entity.Vehicle;
 import com.ghc.cloud.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,8 +21,13 @@ public class VehicleController {
     @Autowired
     private VehicleService vehicleService;
 
+//    @PostMapping("/getCar")
+//    public Result getVehicle(@RequestParam("str") String vehicleA) {
+//        return vehicleService.getVehicle(vehicleA);
+//    }
+
     @PostMapping("/getCar")
-    public Result getVehicle(@RequestParam("str") String vehicleA) {
+    public Result getVehicle(@RequestBody("vehicleA") Vehicle vehicleA) {
         return vehicleService.getVehicle(vehicleA);
     }
 

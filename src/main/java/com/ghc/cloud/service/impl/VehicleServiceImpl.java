@@ -1,13 +1,19 @@
 package com.ghc.cloud.service.impl;
 
+import com.ghc.cloud.entity.Parent;
 import com.ghc.cloud.entity.Result;
 import com.ghc.cloud.entity.Vehicle;
+import com.ghc.cloud.mapper.VehicleMapper;
 import com.ghc.cloud.service.VehicleService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * @author 郭昊晨
@@ -17,6 +23,10 @@ import java.util.List;
 @Service
 @Slf4j
 public class VehicleServiceImpl implements VehicleService {
+
+    @Resource
+    private VehicleMapper vehicleMapper;
+
     /**
      * 输入的A公司车型信息 获取B公司对应的车型
      *
@@ -25,7 +35,19 @@ public class VehicleServiceImpl implements VehicleService {
      */
     @Override
     public List<Vehicle> getVehicle(Vehicle vehicle) {
-        return null;
+
+        Result result = new Result();
+
+
+        //根据具体车型 获取车的牌子
+        Parent parent = vehicleMapper.getParent(vehicle.getVehicleName());
+
+        vehicle.setParentName(parent.getVehicleName());
+        vehicle.setId(parent.getId());
+        vehicle.setParentId(parent.getParentId());
+
+        //获取B公司的对应车型数据
+        return vehicleMapper.getVehicle(vehicle);
     }
 
     /**

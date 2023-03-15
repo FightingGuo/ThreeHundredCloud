@@ -13,7 +13,17 @@ public class Vehicle {
     /**
      * 主键id
      */
-    private Long vehicleId;
+    private Long id;
+
+    /**
+     * 父id
+     */
+    private Long parentId;
+
+    /**
+     * 汽车名称
+     */
+    private String parentName;
 
     /**
      * 汽车名称
@@ -54,6 +64,7 @@ public class Vehicle {
     @Override
     public String toString() {
         return "Vehicle{" +
+                parentName + " " +
                 vehicleName + " " +
                 vehicleType + " " +
                  yearStyle  + " " +

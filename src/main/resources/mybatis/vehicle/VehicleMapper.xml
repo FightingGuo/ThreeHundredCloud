@@ -2,12 +2,33 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ghc.cloud.entity.Vehicle">
+<mapper namespace="com.ghc.cloud.mapper.VehicleMapper">
+
+    <resultMap id="idResult" type="com.ghc.cloud.entity.Vehicle">
+        <id property="id" column="id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="vehicleName" column="vehicle_name"/>
+    </resultMap>
 
     <resultMap id="VehicleResult" type="com.ghc.cloud.entity.Vehicle">
-
-
+        <id property="id" column="vehicle_id"/>
+        <result property="vehicleName" column="vehicle_name"/>
+        <result property="yearStyle" column="year_style"/>
+        <result property="accelerationCount" column="acceleration_count"/>
+        <result property="accelerationUnit" column="acceleration_unit"/>
+        <result property="vehicleStyle" column="vehicle_style"/>
     </resultMap>
+
+    <select id="getParent" parameterType="string" resultMap="idResult">
+        SELECT id, parent_id, vehicle_name FROM `a_vehicle` WHERE vehicle_name = #{vehicleName}
+    </select>
+
+
+    <select id="getVehicle" resultMap="VehicleResult">
+        SELECT vehicle_id, year_style, acceleration_count, acceleration_unit, operation_type, vehicle_type
+        FROM `a_vehicle`
+        WHERE id = #{vehicleId}
+    </select>
 
 
 
